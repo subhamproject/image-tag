@@ -1,4 +1,5 @@
 #!/bin/bash
+set -x
 export PATH="$PATH:/usr/local/bin"
 #docker-compose build maven-app-image-docker
 case $BRANCH_NAME in
