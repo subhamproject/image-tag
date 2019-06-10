@@ -10,7 +10,7 @@ case $BRANCH_NAME in
     ;;
   develop)
   if [ -n "$(echo $BRANCH_NAME|grep '[a-zA-Z]')" ];then
-    tag=$BUILD_ID-$(mvn --non-recursive help:evaluate -Dexpression='project.version' | grep -v '\[.*'|grep -v 'Downloading')
+    tag=$BRANCH_NAME-$(mvn --non-recursive help:evaluate -Dexpression='project.version' | grep -v '\[.*'|grep -v 'Downloading')-$BUILD_ID
     dockerfile=Dockerfile.develop
     fi
     ;;
