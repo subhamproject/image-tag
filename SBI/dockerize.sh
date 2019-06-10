@@ -4,25 +4,25 @@ export PATH="$PATH:/usr/local/bin"
 case $BRANCH_NAME in
   qa)
    if [ -n "$(echo $BRANCH_NAME|grep '[a-zA-Z]')" ];then
-    tag=$BUILD_ID-$(cat pom.xml |grep '<version>'|head -1|sed 's|<version>||; s|</version>||'|awk '{print $1}')
+    tag=$BUILD_ID-$(mvn --non-recursive help:evaluate -Dexpression='project.version' | grep -v '\[.*'|grep -v 'Downloading')
     dockerfile=Dockerfile.develop
     fi
     ;;
   develop)
   if [ -n "$(echo $BRANCH_NAME|grep '[a-zA-Z]')" ];then
-    tag=$BUILD_ID-$(cat pom.xml |grep '<version>'|head -1|sed 's|<version>||; s|</version>||'|awk '{print $1}')
+    tag=$BUILD_ID-$(mvn --non-recursive help:evaluate -Dexpression='project.version' | grep -v '\[.*'|grep -v 'Downloading')
     dockerfile=Dockerfile.develop
     fi
     ;;
   master)
   if [ -n "$(echo $BRANCH_NAME|grep '[a-zA-Z]')" ];then
-   tag=$BUILD_ID-$(cat pom.xml |grep '<version>'|head -1|sed 's|<version>||; s|</version>||'|awk '{print $1}')
+   tag=$BUILD_ID-$(mvn --non-recursive help:evaluate -Dexpression='project.version' | grep -v '\[.*'|grep -v 'Downloading')
    dockerfile=Dockerfile.prod
    fi
     ;;
   *)
   echo $BRANCH_NAME
-    tag=$BUILD_ID-$(cat pom.xml |grep '<version>'|head -1|sed 's|<version>||; s|</version>||'|awk '{print $1}')
+    tag=$BUILD_ID-$(mvn --non-recursive help:evaluate -Dexpression='project.version' | grep -v '\[.*'|grep -v 'Downloading')
     dockerfile=Dockerfile.develop
 esac
 
