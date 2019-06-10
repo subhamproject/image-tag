@@ -1,2 +1,2 @@
-# image-tag
-This repo is to test images tagging for maven project
+# nexus-test
+This is to test nexus integration with maven and jenkins
