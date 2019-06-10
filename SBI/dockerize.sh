@@ -4,7 +4,7 @@ export PATH="$PATH:/usr/local/bin"
 case $BRANCH_NAME in
   qa)
    if [ -n "$(echo $BRANCH_NAME|grep '[a-zA-Z]')" ];then
-    tag=$BUILD_ID-$(mvn --non-recursive help:evaluate -Dexpression='project.version' | grep -v '\[.*'|grep -v 'Downloading')
+    tag=$BRANCH_NAME-$(mvn --non-recursive help:evaluate -Dexpression='project.version' | grep -v '\[.*'|grep -v 'Downloading')-$BUILD_ID
     dockerfile=Dockerfile.develop
     fi
     ;;
@@ -16,7 +16,7 @@ case $BRANCH_NAME in
     ;;
   master)
   if [ -n "$(echo $BRANCH_NAME|grep '[a-zA-Z]')" ];then
-   tag=$BUILD_ID-$(mvn --non-recursive help:evaluate -Dexpression='project.version' | grep -v '\[.*'|grep -v 'Downloading')
+   tag=$BRANCH_NAME-$(mvn --non-recursive help:evaluate -Dexpression='project.version' | grep -v '\[.*'|grep -v 'Downloading')-$BUILD_ID
    dockerfile=Dockerfile.prod
    fi
     ;;
