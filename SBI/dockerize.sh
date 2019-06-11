@@ -2,7 +2,7 @@
 set -x
 export PATH="$PATH:/usr/local/bin"
 DIR=$(dirname $0)
-source $DIR/lib/function.bash
+source $DIR/lib/function.sh
 
 case $BRANCH_NAME in
   qa)
