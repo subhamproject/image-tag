@@ -7,25 +7,25 @@ source $DIR/lib/function.sh
 case $BRANCH_NAME in
   qa)
    if [ -n "$(echo $BRANCH_NAME|grep '[a-zA-Z]')" ];then
-    tag=$BRANCH_NAME-$(pom_version)-$BUILD_ID
+    tag=$BRANCH_NAME-$(version)-$BUILD_ID
     dockerfile=Dockerfile.develop
     fi
     ;;
   develop)
   if [ -n "$(echo $BRANCH_NAME|grep '[a-zA-Z]')" ];then
-    tag=$BRANCH_NAME-$(pom_version)-$BUILD_ID
+    tag=$BRANCH_NAME-$(version)-$BUILD_ID
     dockerfile=Dockerfile.develop
     fi
     ;;
   master)
   if [ -n "$(echo $BRANCH_NAME|grep '[a-zA-Z]')" ];then
-   tag=$BRANCH_NAME-$(pom_version)-$BUILD_ID
+   tag=$BRANCH_NAME-$(version)-$BUILD_ID
    dockerfile=Dockerfile.prod
    fi
     ;;
   *)
   echo $BRANCH_NAME
-    tag=$BUILD_ID-$(pom_version)-$BUILD_ID
+    tag=$BUILD_ID-$(version)-$BUILD_ID
     dockerfile=Dockerfile.develop
 esac
 
