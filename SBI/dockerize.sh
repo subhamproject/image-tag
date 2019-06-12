@@ -3,29 +3,25 @@ set -x
 export PATH="$PATH:/usr/local/bin"
 DIR=$(dirname $0)
 source $DIR/lib/function.sh
-
+[ $BRANCH_NAME == "master" ] && tag=$BRANCH_NAME-$(pom_version) || tag=$BRANCH_NAME-$(pom_version)-$BUILD_ID
 case $BRANCH_NAME in
   qa)
    if [ -n "$(echo $BRANCH_NAME|grep '[a-zA-Z]')" ];then
-    tag=$BRANCH_NAME-$(pom_version)-$BUILD_ID
     dockerfile=Dockerfile.develop
     fi
     ;;
   develop)
   if [ -n "$(echo $BRANCH_NAME|grep '[a-zA-Z]')" ];then
-    tag=$BRANCH_NAME-$(pom_version)-$BUILD_ID
     dockerfile=Dockerfile.develop
     fi
     ;;
   master)
   if [ -n "$(echo $BRANCH_NAME|grep '[a-zA-Z]')" ];then
-   tag=$BRANCH_NAME-$(pom_version)-$BUILD_ID
    dockerfile=Dockerfile.prod
    fi
     ;;
   *)
   echo $BRANCH_NAME
-    tag=$BUILD_ID-$(pom_version)-$BUILD_ID
     dockerfile=Dockerfile.develop
 esac
 
